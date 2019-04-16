@@ -1,4 +1,4 @@
-package it.multicoredev.newprotocol;
+package it.multicoredev.newprotocol.utls;
 
 public class IPAddress {
 
