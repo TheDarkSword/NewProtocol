@@ -7,7 +7,7 @@ public class NetworkObject {
     public NetworkObject(int size){
         connectors = new Connector[size];
         for(int i = 0; i < size; i++){
-            connectors[i] = new Connector();
+            connectors[i] = new Connector("FastEthernet " + (i+1) + "/0");
         }
     }
 

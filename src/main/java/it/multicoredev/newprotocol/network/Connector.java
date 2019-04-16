@@ -6,8 +6,8 @@ public class Connector {
     private boolean isConnected;
     private CableConnector cableConnector;
 
-    public Connector(){
-
+    public Connector(String portName){
+        this.portName = portName;
     }
 
     public String getPortName() {
