@@ -53,4 +53,8 @@ public class CableConnector {
     public void setConnector2(Connector connector2) {
         this.connector2 = connector2;
     }
+
+    public IPAddress getNetwork() {
+        return network;
+    }
 }

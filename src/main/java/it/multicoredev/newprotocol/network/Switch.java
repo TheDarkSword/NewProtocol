@@ -31,12 +31,12 @@ public class Switch extends NetworkObject {
         return this.networkObjects.get(index);
     }
 
-    public void connect(NetworkObject networkObject) throws NoConnectorsException {
+    public void connect(NetworkObject networkObject, String networkAddress) throws NoConnectorsException {
         for (Connector connector : connectors) {
             if (!connector.isConnected()) {
                 for (Connector objectConnector : networkObject.getConnectors()) {
                     if (!objectConnector.isConnected()) {
-                        connector.setCableConnector(new CableConnector(this, networkObject, connector, objectConnector));
+                        connector.setCableConnector(new CableConnector(this, networkObject, connector, objectConnector, networkAddress));
                         return;
                     }
                 }
@@ -51,5 +51,10 @@ public class Switch extends NetworkObject {
         for (Connector connector : connectors) {
 
         }
+    }
+
+    @Override
+    public void receivedPacket(Packet packet) {
+        sendToNext(packet);
     }
 }

@@ -61,4 +61,8 @@ public class IPAddress {
     public IPAddress next() {
         return new IPAddress(value+1);
     }
+
+    public boolean isInSubnet(IPAddress ipAddress){
+        return getOctet(3) == ipAddress.getOctet(3) && getOctet(2) == ipAddress.getOctet(2) && getOctet(1) == ipAddress.getOctet(1);
+    }
 }

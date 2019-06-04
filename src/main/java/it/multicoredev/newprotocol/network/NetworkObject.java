@@ -1,8 +1,9 @@
 package it.multicoredev.newprotocol.network;
 
+import it.multicoredev.newprotocol.Packet;
 import it.multicoredev.newprotocol.utls.RecordMemory;
 
-public class NetworkObject {
+public abstract class NetworkObject {
 
     protected Connector[] connectors;
     protected RecordMemory recordMemory;
@@ -23,4 +24,6 @@ public class NetworkObject {
     public void setConnectors(Connector[] connectors) {
         this.connectors = connectors;
     }
+
+    public abstract void receivedPacket(Packet packet);
 }

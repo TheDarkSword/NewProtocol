@@ -36,12 +36,12 @@ public class Router extends NetworkObject {
         return this.networkObjects.get(index);
     }
 
-    public void connect(NetworkObject networkObject) throws NoConnectorsException {
+    public void connect(NetworkObject networkObject, String networkAddress) throws NoConnectorsException {
         for (Connector connector : connectors) {
             if (!connector.isConnected()) {
                 for(Connector objectConnector : networkObject.getConnectors()){
                     if (!objectConnector.isConnected()) {
-                        connector.setCableConnector(new CableConnector(this, networkObject, connector, objectConnector));
+                        connector.setCableConnector(new CableConnector(this, networkObject, connector, objectConnector, networkAddress));
                         return;
                     }
                 }
@@ -54,7 +54,14 @@ public class Router extends NetworkObject {
     public void sendToNext(Packet packet){
         if(recordMemory.wasAnOldPacket(packet)) return;
         for (Connector connector : connectors) {
-
+            if(connector.getCableConnector().getNetwork().isInSubnet(packet.getDestinationIp())){
+                connector.getCableConnector().getNetworkObject2().receivedPacket(packet);
+            }
         }
+    }
+
+    @Override
+    public void receivedPacket(Packet packet) {
+        sendToNext(packet);
     }
 }
