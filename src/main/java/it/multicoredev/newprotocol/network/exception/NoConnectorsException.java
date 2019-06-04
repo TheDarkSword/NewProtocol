@@ -1,6 +1,6 @@
 package it.multicoredev.newprotocol.network.exception;
 
-public class NoConnectorsException extends Exception {
+public class NoConnectorsException extends RuntimeException {
 
     public NoConnectorsException(){
         super();

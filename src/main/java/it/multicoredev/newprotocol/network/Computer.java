@@ -1,49 +1,32 @@
 package it.multicoredev.newprotocol.network;
 
-import it.multicoredev.newprotocol.utls.IPAddress;
 import it.multicoredev.newprotocol.network.exception.NoConnectorsException;
+
+import java.util.ArrayList;
 
 public class Computer extends NetworkObject {
 
-    private Router router;
-    private IPAddress ipAddress;
+    private ArrayList<NetworkObject> networkObjects;
 
     public Computer() {
-        this(null);
-    }
-
-    public Computer(Router router) {
-        this(router, 0);
-    }
-
-    public Computer(Router router, IPAddress ipAddress){
         super(1);
-        this.router = router;
-        this.ipAddress = ipAddress;
+        networkObjects = new ArrayList<>();
     }
 
-    public Computer(Router router, int ipAddress){
-        super(1);
-        this.router = router;
-        this.ipAddress = new IPAddress(ipAddress);
+    public ArrayList<NetworkObject> getNetworkObjects() {
+        return networkObjects;
     }
 
-    public Computer(Router router, String ipAddress){
-        super(1);
-        this.router = router;
-        this.ipAddress = new IPAddress(ipAddress);
+    public void setNetworkObjects(ArrayList<NetworkObject> computers) {
+        this.networkObjects = computers;
     }
 
-    public Router getRouter() {
-        return router;
+    public void addNetworkObject(NetworkObject networkObject){
+        this.networkObjects.add(networkObject);
     }
 
-    public IPAddress getIpAddress() {
-        return ipAddress;
-    }
-
-    public String getIP(){
-        return ipAddress.getIp();
+    public NetworkObject getNetworkObject(int index){
+        return this.networkObjects.get(index);
     }
 
     public void connect(Router router) throws NoConnectorsException {

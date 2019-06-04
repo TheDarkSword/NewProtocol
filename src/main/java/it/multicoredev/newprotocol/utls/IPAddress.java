@@ -2,9 +2,9 @@ package it.multicoredev.newprotocol.utls;
 
 public class IPAddress {
 
-    private final int value;
+    private final long value;
 
-    public IPAddress(int value) {
+    public IPAddress(long value) {
         this.value = value;
     }
 
@@ -14,13 +14,13 @@ public class IPAddress {
             throw new IllegalArgumentException();
         }
         value =
-                (Integer.parseInt(parts[0], 10) << (8*3)) & 0xFF000000 |
-                        (Integer.parseInt(parts[1], 10) << (8*2)) & 0x00FF0000 |
-                        (Integer.parseInt(parts[2], 10) << (8)) & 0x0000FF00 |
-                        (Integer.parseInt(parts[3], 10)) & 0x000000FF;
+                (Long.parseLong(parts[0], 10) << (8*3)) & 0xFF000000 |
+                        (Long.parseLong(parts[1], 10) << (8*2)) & 0x00FF0000 |
+                        (Long.parseLong(parts[2], 10) << (8)) & 0x0000FF00 |
+                        (Long.parseLong(parts[3], 10)) & 0x000000FF;
     }
 
-    public int getOctet(int i) {
+    public long getOctet(int i) {
 
         if( i<0 || i>=4 ) throw new IndexOutOfBoundsException();
 
@@ -51,10 +51,10 @@ public class IPAddress {
 
     @Override
     public int hashCode() {
-        return value;
+        return (int) value;
     }
 
-    public int getValue() {
+    public long getValue() {
         return value;
     }
 

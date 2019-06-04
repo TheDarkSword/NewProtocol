@@ -1,10 +1,13 @@
 package it.multicoredev.newprotocol.network;
 
+import it.multicoredev.newprotocol.utls.IPAddress;
+
 public class Connector {
 
     private String portName;
     private boolean isConnected;
     private CableConnector cableConnector;
+    private IPAddress ipAddress;
 
     public Connector(String portName){
         this.portName = portName;
@@ -22,6 +25,10 @@ public class Connector {
         return cableConnector;
     }
 
+    public IPAddress getIpAddress() {
+        return ipAddress;
+    }
+
     public void setPortName(String portName) {
         this.portName = portName;
     }
@@ -32,7 +39,10 @@ public class Connector {
 
     public void setCableConnector(CableConnector cableConnector) {
         this.cableConnector = cableConnector;
-        if(cableConnector == null) setConnected(false);
-        else setConnected(true);
+        setConnected(cableConnector != null);
+    }
+
+    public void setIpAddress(IPAddress ipAddress) {
+        this.ipAddress = ipAddress;
     }
 }

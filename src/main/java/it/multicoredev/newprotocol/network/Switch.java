@@ -6,17 +6,12 @@ import it.multicoredev.newprotocol.utls.IPAddress;
 
 import java.util.ArrayList;
 
-public class Router extends NetworkObject {
+public class Switch extends NetworkObject {
 
     private ArrayList<NetworkObject> networkObjects;
 
-    public Router() {
-        super(3);
-        networkObjects = new ArrayList<>();
-    }
-
-    public Router(int size) {
-        super(size);
+    public Switch() {
+        super(24);
         networkObjects = new ArrayList<>();
     }
 
@@ -24,31 +19,31 @@ public class Router extends NetworkObject {
         return networkObjects;
     }
 
-    public void setNetworkObjects(ArrayList<NetworkObject> computers) {
-        this.networkObjects = computers;
+    public void setNetworkObjects(ArrayList<NetworkObject> networkObjects) {
+        this.networkObjects = networkObjects;
     }
 
-    public void addNetworkObject(NetworkObject networkObject){
+    public void addNetworkObject(NetworkObject networkObject) {
         this.networkObjects.add(networkObject);
     }
 
-    public NetworkObject getNetworkObject(int index){
+    public NetworkObject getNetworkObject(int index) {
         return this.networkObjects.get(index);
     }
 
     public void connect(NetworkObject networkObject) throws NoConnectorsException {
         for (Connector connector : connectors) {
             if (!connector.isConnected()) {
-                for(Connector objectConnector : networkObject.getConnectors()){
+                for (Connector objectConnector : networkObject.getConnectors()) {
                     if (!objectConnector.isConnected()) {
                         connector.setCableConnector(new CableConnector(this, networkObject, connector, objectConnector));
                         return;
                     }
                 }
-                throw new NoConnectorsException("Interface 2 haven't connectors available");
+                throw new NoConnectorsException("Interface 2 [" + networkObject.getClass().getSimpleName() + "] haven't connectors available");
             }
         }
-        throw new NoConnectorsException("Interface 1 haven't connectors available");
+        throw new NoConnectorsException("Interface 1 [" + getClass().getSimpleName() + "] haven't connectors available");
     }
 
     public void sendToNext(Packet packet){

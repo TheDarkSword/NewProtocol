@@ -1,21 +1,25 @@
 package it.multicoredev.newprotocol.network;
 
+import it.multicoredev.newprotocol.utls.IPAddress;
+
 public class CableConnector {
 
     private NetworkObject networkObject1;
     private Connector connector1;
     private NetworkObject networkObject2;
     private Connector connector2;
+    private IPAddress network;
 
     public CableConnector(){
 
     }
 
-    public CableConnector(NetworkObject networkObject1, NetworkObject networkObject2, Connector connector1, Connector connector2){
+    public CableConnector(NetworkObject networkObject1, NetworkObject networkObject2, Connector connector1, Connector connector2, String networkAddress){
         this.networkObject1 = networkObject1;
         this.networkObject2 = networkObject2;
         this.connector1 = connector1;
         this.connector2 = connector2;
+        this.network = new IPAddress(networkAddress);
     }
 
     public NetworkObject getNetworkObject1() {

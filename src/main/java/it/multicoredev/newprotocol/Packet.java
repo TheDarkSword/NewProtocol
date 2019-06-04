@@ -1,8 +1,10 @@
 package it.multicoredev.newprotocol;
 
-public class Packet {
+import it.multicoredev.newprotocol.utls.IPAddress;
 
-    private int sourceIP;
-    private int destinationIP;
-    private int checksum;
+public interface Packet {
+
+    IPAddress getSourceIp();
+
+    IPAddress getDestinationIp();
 }
